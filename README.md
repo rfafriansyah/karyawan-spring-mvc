@@ -27,27 +27,27 @@
     />
     <img
       src="/src/main/resources/2..karyawan-list.jpg"
-      alt="foto1" style="width:300; height:300px"
-    />
-    <img
-      src="/src/main/resources/img/3.karyawan-view.jpg"
       alt="foto2" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/img/4.karyawan-list-update.jpg"
+      src="/src/main/resources/img/3.karyawan-view.jpg"
       alt="foto3" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/img/5.karyawan-list-update2.jpg"
+      src="/src/main/resources/img/4.karyawan-list-update.jpg"
       alt="foto4" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/img/6.karyawan-update.jpg"
+      src="/src/main/resources/img/5.karyawan-list-update2.jpg"
       alt="foto5" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/img/7.karyawan-list-sudah-diupdate.jpg"
+      src="/src/main/resources/img/6.karyawan-update.jpg"
       alt="foto6" style="width:300; height:300px"
+    />
+    <img
+      src="/src/main/resources/img/7.karyawan-list-sudah-diupdate.jpg"
+      alt="foto7" style="width:300; height:300px"
     />
   </body>
 </html>
