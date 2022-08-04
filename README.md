@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
-  #Hasil Project
+  <h1>Hasil Project</h1>
     <img
       src="/src/main/resources/img/1.index.jpg"
       alt="foto1" style="width:300; height:300px"
