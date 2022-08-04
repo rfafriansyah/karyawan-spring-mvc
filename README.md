@@ -26,7 +26,7 @@
       alt="foto1" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/2.karyawan-list.jpg"
+      src="/src/main/resources//img/2.karyawan-list.jpg"
       alt="foto2" style="width:300; height:300px"
     />
     <img
