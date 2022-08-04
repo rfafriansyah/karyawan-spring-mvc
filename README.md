@@ -22,11 +22,11 @@
   </head>
   <body>
     <img
-      src="/src/main/resources/img/1.photo_2022-08-04_13-59-02.jpg"
+      src="/src/main/resources/img/1.index.jpg"
       alt="foto1" style="width:300; height:300px"
     />
     <img
-      src="/src/main/resources/2..karyawan-list.jpg"
+      src="/src/main/resources/2.karyawan-list.jpg"
       alt="foto2" style="width:300; height:300px"
     />
     <img
