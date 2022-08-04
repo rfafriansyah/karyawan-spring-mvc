@@ -23,31 +23,31 @@
   <body>
     <img
       src="/src/main/resources/img/1.photo_2022-08-04_13-59-02.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto1" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/2..karyawan-list.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto1" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/img/3.karyawan-view.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto2" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/img/4.karyawan-list-update.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto3" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/img/5.karyawan-list-update2.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto4" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/img/6.karyawan-update.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto5" style="width:300; height:300px"
     />
     <img
       src="/src/main/resources/img/7.karyawan-list-sudah-diupdate.jpg"
-      alt="foto1" style="size: 10px"
+      alt="foto6" style="width:300; height:300px"
     />
   </body>
 </html>
