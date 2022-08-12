@@ -2,118 +2,53 @@ package com.latihan.tugas6.controller;
 
 import com.latihan.tugas6.model.Karyawan;
 import com.latihan.tugas6.service.KaryawanService;
+import com.latihan.tugas6.utils.TemplateResponse;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Map;
 
-@Controller
-@RequestMapping("/v1/view/karyawan")
+@RestController
+@RequestMapping("/v1/karyawan/")
 public class KaryawanController {
     @Autowired
-    KaryawanService karyawanService;
+    public KaryawanService karyawanService;
+    @Autowired
+    public TemplateResponse templateResponse;
 
-    private final int ROW_PER_PAGE = 5;
 
-    //index page
-    @GetMapping(value = {"/", "/index"})
-    public String index(Model model) {
-        model.addAttribute("title", "Title Saya");
-        return "index";
+    @PostMapping("/add")
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Map>save(@RequestBody Karyawan objModel) {
+        Map obj = karyawanService.insert(objModel);
+        return new ResponseEntity<Map>(obj, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/list")
-    public String listKaryawan(Model model, @RequestParam(value = "page", defaultValue = "1") int pageNumber) {
-        List<Karyawan> listKaryawan = karyawanService.dataKaryawan(pageNumber, ROW_PER_PAGE);
-
-        long count = listKaryawan == null ? 1 : listKaryawan.size();
-        boolean hasPrev = pageNumber > 1;
-        boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
-        model.addAttribute("listKaryawan", listKaryawan);
-        model.addAttribute("hasPrev", hasPrev);
-        model.addAttribute("prev", pageNumber - 1);
-        model.addAttribute("hasNext", hasNext);
-        model.addAttribute("next", pageNumber + 1);
-        return "karyawan-list";
+    @PutMapping("/edit")
+    public ResponseEntity<Map>update(@RequestBody Karyawan karyawanId) {
+        Map obj = karyawanService.update(karyawanId);
+        return new ResponseEntity<Map>(obj,HttpStatus.OK);
     }
 
-    @GetMapping(value = "/add")
-    public String showAddKaryawan(Model model) {
-        Karyawan karyawan = new Karyawan();
-        model.addAttribute("add", true);
-        model.addAttribute("karyawan", karyawan);
-        return "karyawan-edit";
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Map>delete(@PathVariable(value = "id") Long id) {
+        Map obj = karyawanService.delete(id);
+        return new ResponseEntity<Map>(obj,HttpStatus.OK);
     }
 
-    @PostMapping(value = "/add")
-    public String addKaryawan(Model model, @ModelAttribute("karyawan") Karyawan karyawan) {
-        try {
-            System.out.println("Nama karyawan : " + karyawan.getName());
-            Karyawan newKaryawan = karyawanService.save(karyawan);
-            return "redirect:/v1/view/karyawan/" + String.valueOf(newKaryawan.getId());
-        } catch (Exception e) {
-            String errorMessage = e.getMessage();
-            model.addAttribute("errorMessage", errorMessage);
-            model.addAttribute("add", true);
-            return "karyawan-edit";
-        }
+    @GetMapping("/list")
+    public ResponseEntity<Map>list(@RequestParam() Integer page, @RequestParam Integer size) {
+        Map list = karyawanService.getAll(size,page);
+        return new ResponseEntity<Map>(list,new HttpHeaders(),HttpStatus.OK);
     }
 
-    @GetMapping(value = {"/{karyawanId}/edit"})
-    public String showEditKaryawan(Model model, @PathVariable long karyawanId) {
-        Karyawan karyawan = null;
-        karyawan = karyawanService.findById(karyawanId);
-        model.addAttribute("add", false);
-        model.addAttribute("karyawan", karyawan);
-        return "karyawan-edit";
-    }
-
-    @PostMapping(value = {"/{karyawanId}/edit"})
-    public String updateKaryawan(Model model, @PathVariable long karyawanId,
-                                 @ModelAttribute("karyawan") Karyawan karyawan) {
-        try {
-
-            System.out.println("karyawan id  " + karyawan.getName());
-            karyawan.setId(karyawanId);
-            karyawanService.update(karyawan);
-            return "redirect:/v1/view/karyawan/" + String.valueOf(karyawan.getId());
-
-        } catch (Exception e) {
-            // log exception first,
-            // then show error
-            String errorMessage = e.getMessage();
-            model.addAttribute("errorMessage", errorMessage);
-
-            model.addAttribute("add", false);
-            return "karyawan-edit";
-        }
-    }
-
-    @GetMapping(value = "/{karyawanId}")
-    public String getKaryawanById(Model model, @PathVariable long karyawanId) {
-        Karyawan karyawan = null;
-        karyawan = karyawanService.findById(karyawanId);
-        model.addAttribute("karyawan", karyawan);
-        return "karyawan";
-    }
-
-    //delete
-    @GetMapping(value = {"/{karyawanId}/delete"})
-    public String showDeleteKaryawanById(
-            Model model, @PathVariable long karyawanId) {
-        Karyawan karyawan = null;
-        karyawan = karyawanService.findById(karyawanId);
-        model.addAttribute("allowDelete", true);
-        model.addAttribute("karyawan", karyawan);
-        return "karyawan";
-    }
-
-    @PostMapping(value = {"/{karyawanId}/delete"})
-    public String deleteKaryawanById(
-            Model model, @PathVariable long karyawanId) {
-        karyawanService.deleted(karyawanId);
-        return "redirect:/v1/view/karyawan/list";
+    @GetMapping("{id}")
+    public  ResponseEntity<Map>getById(@PathVariable(value = "id")Karyawan id) {
+        Map obj = karyawanService.getById(id);
+        return new ResponseEntity<Map>(obj,HttpStatus.OK);
     }
 }
